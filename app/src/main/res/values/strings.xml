@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">دژ ستارگان</string>
+    <string name="cd_hero_banner">تصویر سرزمین دژ ستارگان</string>
+    <string name="cd_commander_avatar">تصویر فرمانده راهنما</string>
+    <string name="nav_map">نقشه پایگاه</string>
+    <string name="nav_buildings">ساختمان‌ها</string>
+    <string name="nav_troops">نیروها و فناوری</string>
+    <string name="nav_battle">نبردها</string>
+    <string name="nav_missions">مأموریت‌ها</string>
+</resources>
