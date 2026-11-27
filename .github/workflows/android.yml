@@ -13,29 +13,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # دریافت پروژه
       - name: Checkout Project
         uses: actions/checkout@v4
 
+      # نصب Java
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
+      # نصب Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
           accept-android-sdk-licenses: true
 
+      # نصب Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '9.3.1'
 
-      - name: Build APK
+      # ساخت کلید امضای Debug
+      - name: Generate Debug Keystore
+        run: |
+          keytool -genkeypair \
+            -v \
+            -keystore debug.keystore \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      # ساخت APK
+      - name: Build Android APK
         run: gradle :app:assembleDebug
 
+      # ذخیره APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
